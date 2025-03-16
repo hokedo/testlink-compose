@@ -16,11 +16,13 @@ services:
       - mariadb_testlink_data:/bitnami
 
   testlink:
-    image: bitnami/testlink
+    image: bitnami/testlink-archived
     container_name: testlink
     restart: always
     ports:
-      - ${PORT_HTTP:-80}:80
+      - "80:80"
+      - "8080:8080"
+      - "8443:8443"
     networks:
       - testlink-network
     volumes:
@@ -34,7 +36,7 @@ services:
       - TESTLINK_USERNAME=${TESTLINK_USERNAME}
       - TESTLINK_PASSWORD=${TESTLINK_PASSWORD}
       - TESTLINK_EMAIL=${TESTLINK_EMAIL}
-      - TESTLINK_LANGUAGE=pt_BR
+      - TESTLINK_LANGUAGE=${TESTLINK_LANGUAGE}
       - SMTP_ENABLE=${SMTP_ENABLE:-false}
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=${SMTP_PORT}
